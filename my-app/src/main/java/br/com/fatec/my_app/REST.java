@@ -89,7 +89,33 @@ public class REST {
 			}
 
 		});
+	}
+		public void getHelloWorld() {
+			get(new Route("/hello") {
+				
+				public Object handle(Request request, Response response) {
+					try {
+						JSONArray jsonResult = new JSONArray(); // first - MAIN
+						JSONObject jsonObjQuestion = new JSONObject();
+											
+						jsonObjQuestion.put("hi", "hello world");
+									
+						
+								
+						jsonResult.put(jsonObjQuestion);
+						
+						return jsonResult;
 
+					} catch (JSONException e) {
+
+						e.printStackTrace();
+					}
+
+					return null;
+
+				}
+
+			});
 	}
 
 }

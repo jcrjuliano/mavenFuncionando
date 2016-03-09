@@ -1,6 +1,7 @@
 package br.com.fatec.my_app;
 
-
+import static spark.Spark.setIpAddress;
+import static spark.Spark.setPort;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,10 +11,16 @@ import org.json.JSONException;
 
 
 public class Test {
+	  private static final String IP_ADDRESS = System.getenv("OPENSHIFT_DIY_IP") != null ? System.getenv("OPENSHIFT_DIY_IP") : "localhost";
+	  private static final int PORT = System.getenv("OPENSHIFT_DIY_PORT") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_PORT")) : 80;
+
 	
 	static Model model = new Model();
 	
 	public static void main(String[] args) throws JSONException{
+        setIpAddress(IP_ADDRESS);
+        setPort(PORT);
+
 		initializeModel();
 		REST controller = new REST(model); 
 		controller.getStudentCompetencies();
